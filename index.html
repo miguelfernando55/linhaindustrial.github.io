@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linha Industrial — Extrusão, Robótica e Embalamento</title>
+<style>
+:root{--bg:#0b1220;--panel:#121d30;--panel2:#17243a;--line:#2b3a52;--text:#edf4ff;--muted:#9fb0c8;--cyan:#48d7e8;--green:#58d68d;--orange:#ffbd69;--purple:#b7a0ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172744 0,#0b1220 58%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{padding:30px clamp(18px,4vw,56px) 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.eyebrow{color:var(--cyan);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800}
+h1{font-size:clamp(1.7rem,3vw,2.6rem);line-height:1.12;margin:8px 0}header p{margin:8px 0 0;color:var(--muted);max-width:780px}
+.badge{border:1px solid #2e786f;background:#12352f;color:#8df0c0;padding:9px 13px;border-radius:999px;font-weight:700;white-space:nowrap}
+main{max-width:1500px;margin:auto;padding:26px clamp(14px,3vw,40px) 48px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin:0 0 14px}
+h2{font-size:1.25rem;margin:0}.hint{color:var(--muted);font-size:.9rem}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:25px}
+.metric,.panel{background:linear-gradient(145deg,rgba(23,36,58,.95),rgba(15,25,42,.95));border:1px solid var(--line);border-radius:16px}
+.metric{padding:16px}.metric .label{font-size:.82rem;color:var(--muted)}.metric strong{display:block;font-size:1.5rem;margin:4px 0}.metric small{color:var(--cyan)}
+.panel{padding:18px;margin-bottom:22px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(155px,1fr));gap:12px;align-items:stretch}
+.station{position:relative;border:1px solid var(--line);background:#101a2b;border-radius:13px;padding:15px 13px;min-height:180px;overflow:hidden}
+.station:not(:last-child):after{content:"→";position:absolute;right:-13px;top:46%;z-index:2;background:#0b1220;color:var(--cyan);font-size:1.25rem;font-weight:900;padding:0 3px}
+.icon{height:46px;width:46px;display:grid;place-items:center;border-radius:12px;background:#20334c;font-size:1.5rem;margin-bottom:12px}
+.station h3{font-size:.98rem;margin:0 0 6px}.station p{font-size:.83rem;color:var(--muted);margin:0 0 12px}
+.tag{display:inline-block;border-radius:6px;padding:4px 7px;font-size:.72rem;font-weight:800;background:#20334c;color:#a9e8f3}.tag.green{background:#153a31;color:#8ce8b4}.tag.orange{background:#3d2c1c;color:#ffd09a}
+.lower{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.steps{display:grid;gap:12px}.step{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}.num{height:30px;width:30px;border-radius:9px;background:#20334c;color:var(--cyan);display:grid;place-items:center;font-weight:900}.step h3{font-size:.94rem;margin:0 0 3px}.step p{font-size:.85rem;color:var(--muted);margin:0}
+.amr-box{display:grid;grid-template-columns:1fr 1fr;gap:10px}.amr{background:#101a2b;border:1px solid var(--line);border-radius:12px;padding:14px}.amr .emoji{font-size:1.6rem}.amr h3{font-size:.95rem;margin:5px 0}.amr p{font-size:.82rem;color:var(--muted);margin:0}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:1px solid #356078;border-radius:10px;background:#17374a;color:#e7fbff;padding:10px 14px;font-weight:750;cursor:pointer}.btn:hover{background:#20516a}.btn.secondary{background:#17243a;border-color:var(--line)}
+.status{margin-top:12px;border-radius:10px;background:#0d1726;border:1px solid var(--line);padding:12px;color:var(--muted);font-size:.88rem}.status b{color:var(--green)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.8rem;margin-top:14px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:5px}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:20px;border-top:1px solid var(--line)}
+@media(max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.station:not(:last-child):after{display:none}.lower{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.flow,.metrics,.amr-box{grid-template-columns:1fr}.station{min-height:unset}.metric strong{font-size:1.3rem}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">Visão geral do processo</div>
+    <h1>Linha Industrial de Extrusão e Embalamento</h1>
+    <p>Produção de peças plásticas para rolamentos, colocação automática em matrizes e acondicionamento em caixas para expedição.</p>
+  </div>
+  <div class="badge">● Conceito da linha</div>
+</header>
+<main>
+  <div class="metrics">
+    <div class="metric"><span class="label">Equipamentos principais</span><strong>5 etapas</strong><small>Da extrusão à caixa</small></div>
+    <div class="metric"><span class="label">Movimentação autónoma</span><strong>AMR</strong><small>Matrizes e caixas</small></div>
+    <div class="metric"><span class="label">Operação central</span><strong>Pick &amp; place</strong><small>Braço robótico</small></div>
+    <div class="metric"><span class="label">Destino final</span><strong>Expedição</strong><small>Caixas com matrizes</small></div>
+  </div>
+
+  <section class="panel">
+    <div class="section-head">
+      <div><h2>01 — Layout funcional da linha</h2><div class="hint">Fluxo principal dos materiais, da esquerda para a direita.</div></div>
+      <span class="tag">Fluxo de produção</span>
+    </div>
+    <div class="flow">
+      <article class="station">
+        <div class="icon">🏭</div><h3>Extrusora de plástico</h3>
+        <p>Produz as peças para rolamentos. As peças saem diretamente da extrusora e caem na esteira.</p>
+        <span class="tag green">Saída de peças</span>
+      </article>
+      <article class="station">
+        <div class="icon">▰</div><h3>Esteira de peças</h3>
+        <p>Transporta as peças até à zona de alcance do braço robótico.</p>
+        <span class="tag">Peças em trânsito</span>
+      </article>
+      <article class="station">
+        <div class="icon">🦾</div><h3>Braço robótico</h3>
+        <p>Recolhe as peças da esteira e coloca-as na matriz. Quando esta fica cheia, transfere-a para uma caixa.</p>
+        <span class="tag green">Pick &amp; place</span>
+      </article>
+      <article class="station">
+        <div class="icon">▤</div><h3>Esteira de matrizes</h3>
+        <p>Apresenta matrizes vazias à estação robótica e encaminha as matrizes cheias para a zona de encaixotamento.</p>
+        <span class="tag orange">Matrizes</span>
+      </article>
+      <article class="station">
+        <div class="icon">📦</div><h3>Esteira de caixas</h3>
+        <p>Posiciona caixas para receber as matrizes cheias e encaminha-as para expedição ao cliente.</p>
+        <span class="tag">Produto embalado</span>
+      </article>
+    </div>
+    <div class="legend"><span><i class="dot"></i>Movimento automático</span><span>AMR abastecem as zonas de matrizes e caixas</span><span>Esquema funcional ilustrativo, não à escala</span></div>
+  </section>
+
+  <div class="lower">
+    <section class="panel">
+      <div class="section-head"><div><h2>02 — Sequência de funcionamento</h2><div class="hint">Ciclo de produção previsto</div></div></div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div><h3>Abastecimento por AMR</h3><p>Os carrinhos autónomos transportam matrizes vazias e caixas até às respetivas zonas de alimentação.</p></div></div>
+        <div class="step"><div class="num">2</div><div><h3>Extrusão e transporte</h3><p>A extrusora produz as peças plásticas, que caem diretamente na esteira e avançam até ao robô.</p></div></div>
+        <div class="step"><div class="num">3</div><div><h3>Enchimento da matriz</h3><p>O braço recolhe as peças e coloca-as nas posições previstas da matriz, repetindo o movimento até esta ficar cheia.</p></div></div>
+        <div class="step"><div class="num">4</div><div><h3>Colocação na caixa</h3><p>Quando a matriz está cheia, o braço transfere-a para uma caixa posicionada na estação de encaixotamento.</p></div></div>
+        <div class="step"><div class="num">5</div><div><h3>Saída para expedição</h3><p>A caixa com a matriz segue pela esteira de caixas para ser preparada e enviada ao cliente.</p></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-head"><div><h2>03 — Logística AMR</h2><div class="hint">Abastecimento e recolha autónomos</div></div></div>
+      <div class="amr-box">
+        <div class="amr"><div class="emoji">🤖</div><h3>AMR de matrizes</h3><p>Entrega matrizes vazias à esteira/estação de alimentação e pode recolher unidades conforme a logística definida.</p></div>
+        <div class="amr"><div class="emoji">🚚</div><h3>AMR de caixas</h3><p>Entrega caixas vazias à linha e pode transportar caixas completas para a área de expedição.</p></div>
+      </div>
+      <div class="status" id="status"><b>Estado do ciclo:</b> pronto para iniciar. Este painel é uma demonstração visual; não está ligado a máquinas reais.</div>
+      <div class="controls">
+        <button class="btn" id="next">Avançar ciclo ▶</button>
+        <button class="btn secondary" id="reset">Reiniciar ↺</button>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>Projeto conceptual da linha industrial · A sequência real deve ser validada com os requisitos de segurança, sensores, interbloqueios e controlo da instalação.</footer>
+<script>
+const stages = [
+  "AMR entrega matrizes vazias e caixas à linha.",
+  "A extrusora produz peças, que caem na esteira de peças.",
+  "As peças chegam à zona de recolha do braço robótico.",
+  "O braço coloca as peças na matriz até atingir a capacidade definida.",
+  "A matriz cheia é transferida pelo braço para uma caixa.",
+  "A caixa completa segue pela esteira para a zona de expedição."
+];
+let index = 0;
+const status = document.getElementById("status");
+function update(){status.innerHTML = "<b>Etapa " + (index+1) + " de " + stages.length + ":</b> " + stages[index];}
+document.getElementById("next").addEventListener("click",()=>{index=(index+1)%stages.length;update();});
+document.getElementById("reset").addEventListener("click",()=>{index=0;update();});
+</script>
+</body>
+</html>
